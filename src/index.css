@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos base para Proyecto Astur */
+body {
+  @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+}
+
+/* Cuando la clase 'dark' está activa en HTML */
+html.dark body {
+  @apply bg-gray-900 text-gray-100;
+}
