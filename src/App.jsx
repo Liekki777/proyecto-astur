@@ -16,6 +16,8 @@ import Reservas from "./pages/Reservas";
 import Contacto from "./pages/Contacto";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Carrito from "./pages/Carrito";
+
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
           {/* Ruta dinámica */}
           <Route path="/contacto" element={<Contacto />} />
           {/* Auth */}
+          <Route path="/carrito" element={<Carrito />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
           {/* Rutas Privadas (Protegidas por el Guardián) */}

@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { useTheme } from '../context/ThemeContext'; // <--- Import Theme
-import { User, Heart, Sun, Moon } from 'lucide-react'; // <--- Import Iconos
+import { useTheme } from '../context/ThemeContext';
+import { useCarrito } from '../context/CarritoContext'; // ✅ 1. Importar el contexto
+import { User, Heart, Sun, Moon, ShoppingBag } from 'lucide-react'; // ✅ 2. Importar icono ShoppingBag
 
 const Navbar = () => {
   const { user, logout } = useAuth();
-  const { theme, toggleTheme } = useTheme(); // <--- Usar Hook
+  const { theme, toggleTheme } = useTheme();
+  
+  // ✅ 3. ESTA ES LA LÍNEA QUE FALTABA:
+  const { carrito } = useCarrito(); 
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors duration-300"> {/* Nota el dark:bg-gray-900 */}
+    <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors duration-300">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         
         {/* LOGO */}
@@ -39,6 +43,17 @@ const Navbar = () => {
             >
                 {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
             </button>
+
+            {/* 🛒 BOTÓN CARRITO (NUEVO) */}
+            <Link to="/carrito" className="text-gray-600 dark:text-gray-300 hover:text-astur-blue transition relative mr-2">
+                <ShoppingBag size={24} />
+                {/* Solo mostramos el punto rojo si hay cosas en el carrito */}
+                {carrito && carrito.length > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-astur-blue text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white dark:border-gray-900 animate-bounce">
+                        {carrito.length}
+                    </span>
+                )}
+            </Link>
 
             {/* Icono Favoritos */}
             <Link to="/favoritos" className="text-gray-600 dark:text-gray-300 hover:text-red-500 transition relative">
